@@ -5,18 +5,13 @@ ParkingLot::ParkingLot(int numCompact, int numRegular, int numLarge)
     : capacity(numCompact + numRegular + numLarge), availableSpots(capacity) {
     
     int spotNumber = 1;
-    
-    // Create compact spots
+   
     for (int i = 0; i < numCompact; i++) {
         spots.push_back(new ParkingSpot(spotNumber++, SpotType::COMPACT));
     }
-    
-    // Create regular spots
     for (int i = 0; i < numRegular; i++) {
         spots.push_back(new ParkingSpot(spotNumber++, SpotType::REGULAR));
     }
-    
-    // Create large spots
     for (int i = 0; i < numLarge; i++) {
         spots.push_back(new ParkingSpot(spotNumber++, SpotType::LARGE));
     }
@@ -33,8 +28,6 @@ int ParkingLot::getAvailableSpots() const { return availableSpots; }
 
 bool ParkingLot::parkVehicle(Vehicle* vehicle) {
     if (!vehicle) return false;
-    
-    // Check if vehicle is already parked
     if (occupiedSpots.find(vehicle->getLicensePlate()) != occupiedSpots.end()) {
         return false;
     }
@@ -89,4 +82,5 @@ ParkingSpot* ParkingLot::findAvailableSpot(const Vehicle* vehicle) const {
         }
     }
     return nullptr;
+
 } 
